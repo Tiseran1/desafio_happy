@@ -1,10 +1,20 @@
-.bg-img {
-    background-image: url("https://www.xtrafondos.com/wallpapers/rick-y-morty-escapando-de-portal-9235.jpg");
-    background-size:cover;
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-left: 10%;
+    
+}
+
+
+.active {
+    color: rgb(255, 0, 0);
 
 }
+
+
 h5{
 
-    color: aliceblue;
+    color: rgb(218, 218, 33);
 }
 

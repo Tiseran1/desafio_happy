@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 
 function App() {
 
-  const [characters, setCharacters] = useState ([])
-  const globalState = { characters,setCharacters}
+  const [pokemons, setPokemons] = useState ([])
+  const globalState = { pokemons,setPokemons}
 
   useEffect (() =>{
-    fetch ("https://rickandmortyapi.com/api/character",)
+    fetch ("https://pokeapi.co/api/v2/pokemon?limit=150&offset=0")
     .then((response) => response.json())
-    .then((data)=> setCharacters(data.results.map(val => {
+    .then((data)=> setPokemons(data.results.map(val => {
       return {...val,favorito:false}
     })))
   },[])

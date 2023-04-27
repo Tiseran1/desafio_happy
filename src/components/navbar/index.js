@@ -1,25 +1,25 @@
 import './navbar.css'
 
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export default () => {
+
+    const setActiveClass =({isActive}) => (isActive ? "active ms-3 text-decoration-none": "text-white ms-3 text-decoration-none")
     return (
         <>
-        <Navbar className='bg-img'> 
-            <Container>
+        <Navbar className bg="dark" variant="dark"> 
+            <div className='nav'>
                 <Navbar.Brand>
-                    <h5>Rick and Morty</h5>
-                    <input
-                    placeholder="Buscar personaje" 
-                    />
+                    <h5>Pockedex Poderosa...</h5>
+
                     </Navbar.Brand>
                 <Nav className='me-auto'>
-                    <Link className='text-white ms-3 text decoration-none' to="/">Personajes</Link>
-                    <Link className='text-white ms-3 text decoration-none' to="/contacto">Favoritos</Link>
+                    <NavLink className={setActiveClass} to="/">Home</NavLink>
+                    <NavLink className={setActiveClass}  to="/pokemon">Pokemon</NavLink>
                 </Nav>
-            </Container>
+            </div>
         </Navbar>
 
 

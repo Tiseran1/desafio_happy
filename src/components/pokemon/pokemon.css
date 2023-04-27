@@ -1,0 +1,10 @@
+.podex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.pokeimg {
+    width: 50vh;
+    margin-left: 40%;
+}

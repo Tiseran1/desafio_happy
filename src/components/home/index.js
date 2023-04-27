@@ -1,44 +1,55 @@
-import {Container, Row, Col, Card, Button } from "react-bootstrap"
+import {Container } from "react-bootstrap"
 import { useContext } from "react"
 import Context from "../../context"
+import { useNavigate } from "react-router-dom"
+import Form from 'react-bootstrap/Form';
+import './home.css'
+import { useEffect, useState } from 'react';
+
+
 
 export default () => {
-    const {characters,setCharacters} = useContext(Context)
-    
-    const handleClick = (id) => {
-        const character = characters.map(val => {
-            if (val.id === id){
-                return {...val,favorito:true}
-            }
-            return val
-        }) 
-        setCharacters(character)
-    } 
+    const {pokemons,setPokemons} = useContext(Context)
 
+    const navigate = useNavigate();
+    
+ //   const handleClick = (id) => {
+  //      const pokemon = pokemons.map(val => {
+    //        if (val.id === id){
+    //            return {...val,favorito:true}
+     //       }
+    //        return val
+     //   }) 
+ //       setPokemons(pokemon)
+ //   }
+        const goToPokemon =(id) =>{
+            navigate(`/pokemon/${id}`)
+        }
+
+        const handlSelect = (e) => {
+            goToPokemon(e.target.value)
+        }
+
+        const [pokemon, setPokemon] = useState({});
+
+        useEffect(() => {
+            fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+            .then(response => response.json())
+            .then(data => setPokemon(data));
+        }, []);
     return (
                 <div className="home-class"> 
                 <Container>
-                    <Row className="align-items-center">
-                        {characters ? characters.map(character =>
-                            <Col lg={4} md={12} className="my-4">
-                            <Card>
-                                <Card.Img variant="top" src={character.image} />
-                                <Card.Body>
-                                    <Card.Title>{character.name}</Card.Title>
-                                    <Card.Text>
-                                        <p> Especie:{character.species} </p>
-                                        <p> Status: {character.status}</p>
-                                        <p> Origen: {character.origin.name}</p>
-                                        <p> Genero: {character.gender}</p>
-                                    </Card.Text>
-                                    <Button variant="danger" onClick={ () => handleClick(character.id)}> favorito</Button>
-                                </Card.Body>
-                            </Card>
-                            </Col>
+                <Form.Select onChange={handlSelect} className="my-2" aria-label="Default select example">
+                <option> Selecciona el pokemon </option>
+                {pokemons ? pokemons.map(pokemon => <option value={pokemon.name}>{pokemon.name} </option>):"loading"}
+                </Form.Select>
+                <div>
+                <h1> Bienvenido a ni pokedex fruna! </h1>
+                <img className="pika" src={pokemon.sprites?.front_default} alt="Pikachu" />
+                </div>
+
                     
-                        ) : <p> Loading...</p>}
-                        
-                    </Row>
                 </Container>
                 </div>
         
